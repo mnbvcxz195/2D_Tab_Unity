@@ -44,4 +44,20 @@ public class ObjectManager : MonoBehaviour
 
         return effect.GetComponent<ParticleSystem>();
     }
+
+    public GameObject CreateWin()
+    {
+        Object winObj = Resources.Load("UI/Win");
+        GameObject win = (GameObject)Instantiate(winObj);
+
+        return win;
+    }
+
+    public GameObject CreateLose()
+    {
+        Object LoseObj = Resources.Load("UI/Lose");
+        GameObject Lose = (GameObject)Instantiate(LoseObj);
+
+        return Lose;
+    }
 }

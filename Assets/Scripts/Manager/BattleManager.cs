@@ -50,6 +50,7 @@ public class BattleManager : MonoBehaviour
                 ui.GetComponent<UIProfile>().RefreshState();
             }
             Debug.Log($"{damage} 로 몬스터가 공격  남은 체력 : {GameManager.GetInstance().curHp}");
+            ShakeCamera.Instance.OnShakeCamera(0.3f, 0.3f);
         }
 
         Lose();
@@ -80,6 +81,7 @@ public class BattleManager : MonoBehaviour
         UIManager.GetInstance().CloseUI("UITab");
 
         GameManager.GetInstance().AddGold(monsterData.gold);
+        ObjectManager.GetInstance().CreateWin();
 
         Invoke("MoveToMain", 2.5f);
     }
@@ -88,6 +90,7 @@ public class BattleManager : MonoBehaviour
     {
         Debug.Log("패배");
         UIManager.GetInstance().CloseUI("UITab");
+        ObjectManager.GetInstance().CreateLose();
 
         if(GameManager.GetInstance().SpendGold(500))
             GameManager.GetInstance().SetCurrentHp(80);
