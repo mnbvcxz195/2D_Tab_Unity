@@ -23,9 +23,13 @@ public class BattleManager : MonoBehaviour
 
     public Monster1 monsterData;
 
+    GameObject uiTab;
+
     public void BattleStart(Monster1 monster)
     {
         monsterData = monster;
+
+        UIManager.GetInstance().OpenUI("UITab");
 
         StartCoroutine("BattleProgress");
     }
@@ -39,6 +43,12 @@ public class BattleManager : MonoBehaviour
 
             int damage = monsterData.atk;
             GameManager.GetInstance().SetCurrentHp(-damage);
+
+            GameObject ui =  UIManager.GetInstance().GetUI("UIProfile");
+            if (ui != null)
+            {
+                ui.GetComponent<UIProfile>().RefreshState();
+            }
             Debug.Log($"{damage} 로 몬스터가 공격  남은 체력 : {GameManager.GetInstance().curHp}");
         }
 
