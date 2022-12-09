@@ -9,9 +9,15 @@ public class UIActionMenu : MonoBehaviour
     public Button btnHealing;
     public Button btnBattle;
 
+    public UIProfile prifile;
+
     // Start is called before the first frame update
     void Start()
     {
+        GameObject ui = UIManager.GetInstance().GetUI("UIProfile");
+        if (ui != null)
+            prifile = ui.GetComponent<UIProfile>();
+
         btnBattle.onClick.AddListener(OnClickBattle);
     }
 
