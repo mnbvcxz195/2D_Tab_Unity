@@ -17,7 +17,7 @@ public class UIProfile : MonoBehaviour
     {
         txtLevel.text = $"LV, { GameManager.GetInstance().level}";
         txtName.text = $"{ GameManager.GetInstance().playerName}";
-        txtGold.text = string.Format("{0:#,##0}", GameManager.GetInstance().gold + "g");
+        txtGold.text = string.Format("{0:#,##0}", GameManager.GetInstance().gold) + "g";
 
         hpBar.maxValue = GameManager.GetInstance().totalHp;
         hpBar.value = GameManager.GetInstance().curHp;
