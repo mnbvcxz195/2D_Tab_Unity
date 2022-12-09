@@ -18,4 +18,14 @@ public class UITab : MonoBehaviour
         Debug.Log("АјАн");
         BattleManager.GetInstance().AttackMonster();
     }
+
+    void OriginColor()
+    {
+        btnTab.image.color = new Color32(0, 0, 0, 0);
+    }
+
+    void ChangeColor()
+    {
+        btnTab.image.color = new Color32(255, 0, 0, 255);
+    }
 }

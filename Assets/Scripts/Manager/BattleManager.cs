@@ -43,6 +43,7 @@ public class BattleManager : MonoBehaviour
 
             int damage = monsterData.atk;
             GameManager.GetInstance().SetCurrentHp(-damage);
+            UIManager.GetInstance().CloseUI("UITab");
 
             GameObject ui =  UIManager.GetInstance().GetUI("UIProfile");
             if (ui != null)
@@ -51,6 +52,7 @@ public class BattleManager : MonoBehaviour
             }
             Debug.Log($"{damage} 로 몬스터가 공격  남은 체력 : {GameManager.GetInstance().curHp}");
             ShakeCamera.Instance.OnShakeCamera(0.3f, 0.3f);
+            
         }
 
         Lose();
