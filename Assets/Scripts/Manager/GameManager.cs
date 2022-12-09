@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
         totalHp += addHp;
     }
 
-    public void SetHp(int hp)
+    public void SetCurrentHp(int hp)
     {
         curHp += hp;
 

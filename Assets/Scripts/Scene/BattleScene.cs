@@ -14,11 +14,7 @@ public class BattleScene : MonoBehaviour
 
         UIManager.GetInstance().SetEventSystem();
         UIManager.GetInstance().OpenUI("UIProfile");
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        BattleManager.GetInstance().BattleStart(new Monster1());
     }
 }
