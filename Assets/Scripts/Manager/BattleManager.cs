@@ -61,7 +61,7 @@ public class BattleManager : MonoBehaviour
         float randY = Random.Range(-1.2f, 1.2f);
 
         var particle = ObjectManager.GetInstance().CreateHitEffect();
-        particle.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        particle.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
         particle.transform.localPosition = new Vector3(0 + randX, 0.7f + randY, -0.5f);
 
 
