@@ -55,13 +55,26 @@ public class BattleManager : MonoBehaviour
         Lose();
     }
 
+    public void AttackMonster()
+    {
+        monsterData.hp -- ;
+
+        if(monsterData.hp < 0)
+        {
+            Victory();
+        }
+    }
+
     void Victory()
     {
-
+        Debug.Log("½Â¸®");
+        StopCoroutine("BattleProgress");
+        UIManager.GetInstance().CloseUI("UITab");
     }
 
     void Lose()
     {
         Debug.Log("ÆÐ¹è");
+        UIManager.GetInstance().CloseUI("UITab");
     }
 }

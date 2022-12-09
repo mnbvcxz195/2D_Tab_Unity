@@ -15,6 +15,7 @@ public class UITab : MonoBehaviour
 
     void OnTap()
     {
-        Debug.Log("공격!!!!!");
+        Debug.Log("공격");
+        BattleManager.GetInstance().AttackMonster();
     }
 }
