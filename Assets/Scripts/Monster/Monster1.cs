@@ -10,4 +10,6 @@ public class Monster1
     public int hp = 100;
 
     public float delay = 2.5f;
+
+    public int gold = 300;
 }

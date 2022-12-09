@@ -57,6 +57,14 @@ public class BattleManager : MonoBehaviour
 
     public void AttackMonster()
     {
+        float randX = Random.Range(-1.2f, 1.2f);
+        float randY = Random.Range(-1.2f, 1.2f);
+
+        var particle = ObjectManager.GetInstance().CreateHitEffect();
+        particle.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        particle.transform.localPosition = new Vector3(0 + randX, 0.7f + randY, -0.5f);
+
+
         monsterData.hp -- ;
 
         if(monsterData.hp < 0)
@@ -70,11 +78,29 @@ public class BattleManager : MonoBehaviour
         Debug.Log("½Â¸®");
         StopCoroutine("BattleProgress");
         UIManager.GetInstance().CloseUI("UITab");
+
+        GameManager.GetInstance().AddGold(monsterData.gold);
+
+        Invoke("MoveToMain", 2.5f);
     }
 
     void Lose()
     {
         Debug.Log("ÆÐ¹è");
         UIManager.GetInstance().CloseUI("UITab");
+
+        if(GameManager.GetInstance().SpendGold(500))
+            GameManager.GetInstance().SetCurrentHp(80);
+
+        else
+            GameManager.GetInstance().SetCurrentHp(10);
+
+
+        Invoke("MoveToMain", 2.5f);
+    }
+
+    void MoveToMain()
+    {
+        ScenesManager.GetInstance().ChangeScene(Scene.Main);
     }
 }
