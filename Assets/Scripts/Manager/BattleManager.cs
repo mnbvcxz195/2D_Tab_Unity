@@ -43,16 +43,15 @@ public class BattleManager : MonoBehaviour
 
             int damage = monsterData.atk;
             GameManager.GetInstance().SetCurrentHp(-damage);
-            UIManager.GetInstance().CloseUI("UITab");
 
-            GameObject ui =  UIManager.GetInstance().GetUI("UIProfile");
+            GameObject ui = UIManager.GetInstance().GetUI("UIProfile");
             if (ui != null)
             {
                 ui.GetComponent<UIProfile>().RefreshState();
             }
             Debug.Log($"{damage} 로 몬스터가 공격  남은 체력 : {GameManager.GetInstance().curHp}");
             ShakeCamera.Instance.OnShakeCamera(0.3f, 0.3f);
-            
+
         }
 
         Lose();
@@ -60,20 +59,22 @@ public class BattleManager : MonoBehaviour
 
     public void AttackMonster()
     {
+        var particle = MemoryPool.instance.effectQueue.Dequeue();
         float randX = Random.Range(-1.2f, 1.2f);
         float randY = Random.Range(-1.2f, 1.2f);
 
-        var particle = ObjectManager.GetInstance().CreateHitEffect();
-        particle.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
-        particle.transform.localPosition = new Vector3(0 + randX, 0.7f + randY, -0.5f);
-
-
-        monsterData.hp -- ;
-
-        if(monsterData.hp < 0)
+        if(MemoryPool.instance.effectQueue.Count >= 0)
+        {
+            particle.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+            particle.transform.localPosition = new Vector3(0 + randX, 0.7f + randY, -0.5f);
+            particle.SetActive(true);
+        }
+        monsterData.hp--;
+        if (monsterData.hp < 0)
         {
             Victory();
         }
+
     }
 
     void Victory()
@@ -94,7 +95,7 @@ public class BattleManager : MonoBehaviour
         UIManager.GetInstance().CloseUI("UITab");
         ObjectManager.GetInstance().CreateLose();
 
-        if(GameManager.GetInstance().SpendGold(500))
+        if (GameManager.GetInstance().SpendGold(500))
             GameManager.GetInstance().SetCurrentHp(80);
 
         else
@@ -107,5 +108,12 @@ public class BattleManager : MonoBehaviour
     void MoveToMain()
     {
         ScenesManager.GetInstance().ChangeScene(Scene.Main);
+    }
+
+    public void RemoveEffect()
+    {
+        var particle = MemoryPool.instance.effectQueue.Dequeue();
+
+        particle.SetActive(false);
     }
 }

@@ -13,6 +13,10 @@ public class ShakeCamera : MonoBehaviour
     private float shakeTime;
     private float shakeIntensity;
 
+    public new Camera camera;
+
+    bool isChange = false;
+
     //Main Camera 오브젝트에 컴포넌트로 적용하면
     //게임을 실행할 때 메모리 할당 / 생성자 메소드 실행
     //이 때 자기 자신의 정보를 instance 변수에 저장
@@ -32,23 +36,39 @@ public class ShakeCamera : MonoBehaviour
 
         StopCoroutine("ShakeByPosition");
         StartCoroutine("ShakeByPosition");
+
+        StartCoroutine("ChangeBackGroundColor");
     }
 
-    private IEnumerator ShakeByPosition()
+    IEnumerator ShakeByPosition()
     {
         Vector3 startPosition = transform.position;
 
         while (shakeTime > 0.0f)
         {
-
+            isChange = true;
             transform.position = startPosition + Random.insideUnitSphere * shakeIntensity;
 
 
             shakeTime -= Time.deltaTime;
+            
 
             yield return null;
         }
 
         transform.position = startPosition;
+    }
+
+
+    IEnumerator ChangeBackGroundColor()
+    {
+        while (isChange)
+        {
+            isChange = false;
+            camera.backgroundColor = new Color32(255, 0, 0, 255);
+
+            yield return null;
+        }
+       camera.backgroundColor = new Color32(213, 255, 255, 0);
     }
 }

@@ -37,13 +37,13 @@ public class ObjectManager : MonoBehaviour
         return monster;
     }
 
-    public ParticleSystem CreateHitEffect()
+   /* public ParticleSystem CreateHitEffect()
     {
         Object effectObj = Resources.Load("Effect/Hit_Effect");
         GameObject effect = (GameObject)Instantiate(effectObj);
 
         return effect.GetComponent<ParticleSystem>();
-    }
+    }*/
 
     public GameObject CreateWin()
     {
