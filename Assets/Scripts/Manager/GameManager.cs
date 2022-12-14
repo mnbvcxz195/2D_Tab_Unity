@@ -24,13 +24,32 @@ public class GameManager : MonoBehaviour
 
     public string playerName = "Char";
 
-    public int level = 99;
+    public int level = 1;
 
     public int gold = 1000;    //추가, 삭제
 
     public int totalHp = 100;  //증가
     public int curHp = 100;    //증가, 감소
 
+    public void LoadData()
+    {
+        playerName = PlayerPrefs.GetString("playerName", "Char");
+
+        level = PlayerPrefs.GetInt("level", 1);
+        gold = PlayerPrefs.GetInt("gold", 500);
+        totalHp = PlayerPrefs.GetInt("totalHp", 100);
+        curHp = PlayerPrefs.GetInt("curHp", 100);
+
+    }
+
+    public void SaveData()
+    {
+        PlayerPrefs.SetString("playerName", playerName);
+        PlayerPrefs.SetInt("level", level);
+        PlayerPrefs.SetInt("gold", gold);
+        PlayerPrefs.SetInt("totalHp", totalHp);
+        PlayerPrefs.SetInt("curHp", curHp);
+    }
     public void AddGold(int gold)
     {
         this.gold += gold;

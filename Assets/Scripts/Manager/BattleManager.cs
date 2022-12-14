@@ -31,6 +31,8 @@ public class BattleManager : MonoBehaviour
 
         UIManager.GetInstance().OpenUI("UITab");
 
+        MemoryPool.instance.InitEffectPool(5);  //Stack
+
         StartCoroutine("BattleProgress");
     }
 
@@ -59,16 +61,18 @@ public class BattleManager : MonoBehaviour
 
     public void AttackMonster()
     {
-        var particle = MemoryPool.instance.effectQueue.Dequeue();
-        float randX = Random.Range(-1.2f, 1.2f);
-        float randY = Random.Range(-1.2f, 1.2f);
+        //var particle = MemoryPool.instance.effectQueue.Dequeue();
+        //float randX = Random.Range(-1.2f, 1.2f);
+        //float randY = Random.Range(-1.2f, 1.2f);
 
-        if(MemoryPool.instance.effectQueue.Count >= 0)
+        MemoryPool.instance.UseEffect(); //Stack
+
+        /*if(MemoryPool.instance.effectQueue.Count >= 0)
         {
             particle.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
             particle.transform.localPosition = new Vector3(0 + randX, 0.7f + randY, -0.5f);
             particle.SetActive(true);
-        }
+        }*/
         monsterData.hp--;
         if (monsterData.hp < 0)
         {
@@ -110,10 +114,10 @@ public class BattleManager : MonoBehaviour
         ScenesManager.GetInstance().ChangeScene(Scene.Main);
     }
 
-    public void RemoveEffect()
+    /*public void RemoveEffect()
     {
         var particle = MemoryPool.instance.effectQueue.Dequeue();
 
         particle.SetActive(false);
-    }
+    }*/
 }
