@@ -21,6 +21,18 @@ public class BattleManager : MonoBehaviour
     }
     #endregion
 
+    public Monster1[] monsterDatas = new Monster1[]
+    {
+        new Monster1("Monster1", 10, 30, 2.5f, 300),
+        new Monster1("Monster2", 15, 50, 2f, 1000)
+    };
+
+    public Monster1 GetRamdomMoster()
+    {
+        int rand = Random.Range(0, monsterDatas.Length);
+        return monsterDatas[rand];
+    }
+
     public Monster1 monsterData;
 
     GameObject uiTab;

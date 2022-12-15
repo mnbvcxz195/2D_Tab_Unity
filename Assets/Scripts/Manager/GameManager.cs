@@ -31,6 +31,16 @@ public class GameManager : MonoBehaviour
     public int totalHp = 100;  //증가
     public int curHp = 100;    //증가, 감소
 
+    public int characterIdx = 0;// 0 -> mage, 1 -> skeletone
+
+    //캐릭터 1
+    public int mageHp = 100;
+    public string mageImg = "Character";
+
+    //캐릭터 2
+    public int skeletoneHp = 130;
+    public string skeletoneImg = "Character2";
+
     public void LoadData()
     {
         playerName = PlayerPrefs.GetString("playerName", "Char");
@@ -53,6 +63,7 @@ public class GameManager : MonoBehaviour
     public void AddGold(int gold)
     {
         this.gold += gold;
+        SaveData();
     }
 
     public bool SpendGold(int gold)
@@ -60,6 +71,7 @@ public class GameManager : MonoBehaviour
         if(this.gold >= gold)
         {
             this.gold -= gold;
+            SaveData();
             return true;
         }
 
@@ -69,11 +81,13 @@ public class GameManager : MonoBehaviour
     public void IncreaseTotalHp(int addHp)
     {
         totalHp += addHp;
+        SaveData();
     }
 
     public void SetCurrentHp(int hp)
     {
         curHp += hp;
+        SaveData();
 
         if (curHp > totalHp)
             curHp = totalHp;
