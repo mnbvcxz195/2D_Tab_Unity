@@ -21,9 +21,9 @@ public class ObjectManager : MonoBehaviour
     }
     #endregion
 
-    public GameObject CreateCharacter(string characterName)
+    public GameObject CreateCharacter(string playerName)
     {
-        Object characterObj = Resources.Load("Sprite/" + characterName);
+        Object characterObj = Resources.Load("Sprite/" + playerName);
         GameObject character = (GameObject)Instantiate(characterObj);
 
         return character;

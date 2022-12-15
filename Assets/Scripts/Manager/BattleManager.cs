@@ -86,6 +86,8 @@ public class BattleManager : MonoBehaviour
             particle.SetActive(true);
         }*/
         monsterData.hp--;
+
+        Debug.Log($"MonsterName : {monsterData.MonsterName}    hp : {monsterData.hp}");
         if (monsterData.hp < 0)
         {
             Victory();

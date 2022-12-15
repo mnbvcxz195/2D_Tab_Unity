@@ -7,14 +7,12 @@ public class MainScene : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //GameManager.GetInstance().LoadData();
+        GameManager.GetInstance().LoadData();
 
-        string characterName = "";
-        if (GameManager.GetInstance().characterIdx == 0)
+
+        /*if (GameManager.GetInstance().characterIdx == 0)
         {
-            characterName = GameManager.GetInstance().mageImg;
-            GameManager.GetInstance().totalHp = GameManager.GetInstance().mageHp;
-            GameManager.GetInstance().curHp = GameManager.GetInstance().mageHp;
+            
         }
         else
         {
@@ -22,8 +20,10 @@ public class MainScene : MonoBehaviour
             GameManager.GetInstance().totalHp = GameManager.GetInstance().skeletoneHp;
             GameManager.GetInstance().curHp = GameManager.GetInstance().skeletoneHp;
         }
-
-        GameObject go = ObjectManager.GetInstance().CreateCharacter(characterName);
+*/
+        int x = GameManager.GetInstance().characterIdx;
+        var player = GameManager.GetInstance().SetPlayer(x);
+        GameObject go = ObjectManager.GetInstance().CreateCharacter(player.playerName);
         go.transform.localScale = new Vector3(2, 2, 2);
         go.transform.localPosition = new Vector3(0, 1.1f, 0);
 
